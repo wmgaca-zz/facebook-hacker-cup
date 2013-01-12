@@ -1,9 +1,13 @@
 import sys
 
 def width(line, fsize):
+    assert isinstance(line, basestring)
+
     return fsize * len(line)
 
 def height(lines, fsize):
+    assert isinstance(lines, list)
+
     return len(lines) * fsize
 
 def main():
