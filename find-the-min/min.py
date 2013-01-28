@@ -40,6 +40,7 @@ def addunused():
     m.append(unused[0])
     used[unused[0]] += 1
     unused.pop(0)
+    unused.append(unused[-1] + 1)
 
 def addvalue(value):
     global m, unused, used
@@ -53,7 +54,7 @@ for t in xrange(1, stdreadint() + 1):
     global m, used, unused
 
     gen(a, b, c, r, k)
-    unused = [x for x in xrange(2*k) if x not in used]
+    unused = [x for x in xrange(2*k+1) if x not in used]
 
     addunused()
 
@@ -63,7 +64,7 @@ for t in xrange(1, stdreadint() + 1):
 
         if used[curr] > 0:
             addunused()
-        elif curr < unused[0]:
+        elif curr < unused[0]:  
             addvalue(curr)
         elif curr > unused[0]:
             addunused()
