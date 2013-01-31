@@ -1,4 +1,5 @@
 import sys
+import bisect
 from collections import defaultdict
 from time import gmtime, strftime
 
@@ -17,23 +18,6 @@ def gen(a, b, c, r, k):
         val = (b * val + c) % r
         m.append(val)
         used[val] += 1
-
-def insert(sortedlist, value):
-    if value < sortedlist[0]:
-        sortedlist.insert(0, value)
-        return
-    if value > sortedlist[-1]:
-        sortedlist.append(value)
-        return
-
-    for i in xrange(len(sortedlist)):
-        if value < sortedlist[i]:
-            sortedlist.insert(i, value)
-            inserted = True
-            return
-
-    print 'This should never happen'
-    sys.exit()
 
 def addunused():
     global m, unused, used    
@@ -68,7 +52,7 @@ for t in xrange(1, stdreadint() + 1):
             addvalue(curr)
         elif curr > unused[0]:
             addunused()
-            if curr <= k: insert(unused, curr)
+            if curr <= k: bisect.insort(unused, curr)
     
     m.append(m[k])
     res = n % (k+1)
