@@ -18,8 +18,7 @@ def merge(a, b):
     global debug
     result = []
     while len(a) > 0 and len(b) > 0:
-        if debug[0] == '1': 
-            result.append(a.pop(0))
+        if debug[0] == '1': result.append(a.pop(0))
         else: result.append(b.pop(0))
         debug = debug[1:]
     result.extend(a)

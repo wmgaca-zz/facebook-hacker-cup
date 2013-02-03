@@ -9,8 +9,7 @@ class Node(object):
 
     class Coords(object):
         def __init__(self, coords):
-            self.x = coords[0]
-            self.y = coords[1]
+            self.x, self.y = coords
 
     nodes = None
     start_node = None
@@ -25,26 +24,19 @@ class Node(object):
 
         self.f = None
         self.h = None
-        if value == START:
-            self.f = 0
+        if value == START: self.f = 0
 
-        if self.value == START:
-            Node.start_node = self
-        elif self.value == DEST:
-            Node.dest_node = self
+        if self.value == START: Node.start_node = self
+        elif self.value == DEST: Node.dest_node = self
 
     @property
     def g(self):
-
-        if self.f is None:
-            self.update_f()
-            
+        if self.f is None: self.update_f()
+        
         g = self.f
 
-        if self.h:
-            g += self.h
-        else:
-            g += self.approximate_h()
+        if self.h: g += self.h
+        else: g += self.approximate_h()
 
         return g
 
@@ -60,14 +52,12 @@ class Node(object):
 
     @property
     def x(self):
-        if not self.coords:
-            return None
+        if not self.coords: return None
         return self.coords.x
 
     @property
     def y(self):
-        if not self.coords:
-            return None
+        if not self.coords: return None
         return self.coords.y
 
     def __repr__(self):
@@ -174,8 +164,7 @@ def find_path(file_path):
 
 
         # get most promising node for the next step
-        if not opened:
-            return None
+        if not opened: return None
         best = 0
         print "best g: %s" % opened[best].g
         for i in xrange(len(opened)):
