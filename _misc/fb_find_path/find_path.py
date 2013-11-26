@@ -84,14 +84,15 @@ class Node(object):
 
     @staticmethod
     def print_nodes(coords=None, opened=None):
-        string = chr(201) + (Node.tree_width) * chr(205) + chr(187) + '\n'
+        #string = chr(201) + (Node.tree_width) * chr(205) + chr(187) + '\n'
+        string = '+' + (Node.tree_width) * '-' + '+\n'
 
         for line in Node.nodes:
-            string += chr(186)
+            string += '|'  #chr(186)
 
             for node in line:
                 if coords and node.x == coords.x and node.y == coords.y:
-                    string += chr(219)
+                    string += 'x'  #chr(219)
                 elif node.visited:
                     string += ' '
                 elif opened and node in opened:
@@ -99,17 +100,22 @@ class Node(object):
                     if g > 9:
                         g -= 10;
                     string += '%s' % g
+                else:
+                    string += node.value
+                """
                 elif node.value == EMPTY:
-                    string += chr(178)
+                    string += EMPTY #chr(178)
                 elif node.value == NORMAL:
                     string += chr(176)
                 elif node.value == START:
                     string += 'X'
                 elif node.value == DEST:
                     string += 'O'
-            string += chr(186) + '\n'
+                """
+            string += '|\n'  #chr(186) + '\n'
 
-        string += chr(200) + (Node.tree_width) * chr(205) + chr(188)
+        #string += chr(200) + (Node.tree_width) * chr(205) + chr(188)
+        string += '+' + (Node.tree_width) * '-' + '+\n'
 
         print string
 
